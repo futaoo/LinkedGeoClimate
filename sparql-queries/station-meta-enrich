@@ -1,0 +1,26 @@
+PREFIX car: <http://www.semanticweb.org/jiantaowu/ontologies/2022/3/CubeCA/resource/>
+PREFIX ca: <http://www.semanticweb.org/jiantaowu/ontologies/2022/3/CubeCA/>
+PREFIX geof: <http://www.opengis.net/def/function/geosparql/>
+PREFIX geos: <http://www.opengis.net/ont/geosparql#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+INSERT {GRAPH <http://example.org/station/more-meta>
+    {
+      ?sta ca:hasMetaAsCode ?code ; geos:sfWithin ?lc .
+      ?code rdfs:label ?label ; ca:codeOfProperty ?prop ; ca:codeOfFeature ?fe .
+      ?lc a geos:Feature ; ca:hasPolygonGeometry ?polyg ; ca:hasClimateAnalysisCode ?code .
+      ?polyg geos:asWKT ?plWKT .
+    } 
+} WHERE {
+	  {
+      select ?sta (strdt(concat("SRID=4326; ", str(?nWKT)) ,geos:wktLiteral) as ?pWKT) {
+        ?sta  ca:hasPointGeometry/geos:asWKT ?nWKT .
+      }
+    }
+    service <loop:http://localhost:3031/sparql> {
+      ?lc ca:hasPolygonGeometry ?polyg ; ca:hasClimateAnalysisCode ?code .
+      ?code a ca:CORINELandCoverCode ; rdfs:label ?label ; ca:codeOfProperty ?prop ; ca:codeOfFeature ?fe .
+      ?polyg geos:asWKT ?plWKT .
+      FILTER (geof:sfWithin(?pWKT, ?plWKT))
+    }
+}
