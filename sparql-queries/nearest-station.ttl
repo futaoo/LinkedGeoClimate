@@ -4,6 +4,7 @@ PREFIX unit: <http://www.opengis.net/def/uom/OGC/1.0/>
 PREFIX sosa: <http://www.w3.org/ns/sosa/>
 PREFIX ca: <http://www.semanticweb.org/jiantaowu/ontologies/2022/3/CubeCA/>
 PREFIX geos: <http://www.opengis.net/ont/geosparql#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 select ?wktLabel ?f ?sta ?dst {
   service <http://localhost:8014/sparql> 
