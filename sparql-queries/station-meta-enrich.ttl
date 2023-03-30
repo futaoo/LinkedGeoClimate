@@ -12,15 +12,15 @@ INSERT {GRAPH <http://example.org/station/more-meta>
       ?polyg geos:asWKT ?plWKT .
     } 
 } WHERE {
-	  {
-      select ?sta (strdt(concat("SRID=4326; ", str(?nWKT)) ,geos:wktLiteral) as ?pWKT) {
-        ?sta  ca:hasPointGeometry/geos:asWKT ?nWKT .
-      }
+  {
+    select ?sta (strdt(concat("SRID=4326; ", str(?nWKT)) ,geos:wktLiteral) as ?pWKT) {
+      ?sta  ca:hasPointGeometry/geos:asWKT ?nWKT .
     }
-    service <loop:http://localhost:3031/sparql> {
-      ?lc ca:hasPolygonGeometry ?polyg ; ca:hasClimateAnalysisCode ?code .
-      ?code a ca:CORINELandCoverCode ; rdfs:label ?label ; ca:codeOfProperty ?prop ; ca:codeOfFeature ?fe .
-      ?polyg geos:asWKT ?plWKT .
-      FILTER (geof:sfWithin(?pWKT, ?plWKT))
-    }
+  }
+  service <loop:http://localhost:3031/sparql> {
+    ?lc ca:hasPolygonGeometry ?polyg ; ca:hasClimateAnalysisCode ?code .
+    ?code a ca:CORINELandCoverCode ; rdfs:label ?label ; ca:codeOfProperty ?prop ; ca:codeOfFeature ?fe .
+    ?polyg geos:asWKT ?plWKT .
+    FILTER (geof:sfWithin(?pWKT, ?plWKT))
+  }
 }
