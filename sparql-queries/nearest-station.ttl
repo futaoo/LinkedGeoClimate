@@ -5,7 +5,7 @@ PREFIX sosa: <http://www.w3.org/ns/sosa/>
 PREFIX ca: <http://www.semanticweb.org/jiantaowu/ontologies/2022/3/CubeCA/>
 PREFIX geos: <http://www.opengis.net/ont/geosparql#>
 
-select  ?f ?sta ?dst {
+select ?wktLabel ?f ?sta ?dst {
   service <http://localhost:8014/sparql> 
   {
     select * { ?f a lgdo:Farmyard; geos:hasGeometry/geos:asWKT ?fWkt ; rdfs:label ?wktLabel .} 
