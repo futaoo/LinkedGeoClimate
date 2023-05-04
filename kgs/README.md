@@ -1,4 +1,4 @@
-# KGs Implementations
+# KGs implementations
 
 ## Triple store
 
