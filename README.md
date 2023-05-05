@@ -8,7 +8,9 @@ Please cite the above paper if you intent to use whole/part of the code. This co
 
 ## Architecture of LinkedGeoClimate:
 
-<img src="imgs/arch.png" alt="drawing" width="300"/>
+<p align="center">
+<img src="imgs/arch.png" alt="drawing" width="500"/>
+</p>
 
 ## How to use
 1. [`kgs/`](kgs/) contains component softwares and middles, and also the instructions on the reproduction of LinkedGeoClimate in the paper.
