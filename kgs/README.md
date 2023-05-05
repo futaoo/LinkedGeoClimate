@@ -18,4 +18,4 @@ We use Ontop to expose all data, including geographical data (e.g., land cover, 
 
 ### Open to use
 
-The Ontop implementations used in the paper can be found [here](https://drive.google.com/drive/folders/1SIJsoayGexSfC1poY_-ZXyB_nfU1RBCy?usp=sharing).
+The Ontop implementations used in the paper can be found [here](https://drive.google.com/drive/folders/1SIJsoayGexSfC1poY_-ZXyB_nfU1RBCy?usp=sharing). This should be used with ontologies [here](https://github.com/futaoo/LinkedGeoClimate/tree/main/kgs/ontologies) and OBDA mapping files [here](https://github.com/futaoo/LinkedGeoClimate/tree/main/kgs/obda) to reproduce the virtual knowledge graphs proposed in the paper. The PostgreSQL database is used as the underlying relational database of Ontop, which can be downloaded from this [website](https://www.postgresql.org/download/).
