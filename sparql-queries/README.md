@@ -8,7 +8,11 @@ Sextant visualization for the results of source code [station-meta-enrich.ttl](s
 
 ## Find nearest climate stations for OSM farmyards
 
-Sextant visualization for the results of source code [nearest-station.ttl](nearest-station.ttl)
+1. Sextant visualization for the results of source code [nearest-station.ttl](nearest-station.ttl)
 
 
 <img src="https://github.com/futaoo/LinkedGeoClimate/blob/main/imgs/nearest-sta.png" alt="drawing" width="500"/>
+
+2. Full results are given in [nearest-station.csv](nearest-station.csv)
+
+
