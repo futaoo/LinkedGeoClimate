@@ -1,0 +1,28 @@
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX go: <http://purl.obolibrary.org/obo/GO_>
+PREFIX sp: <http://spinrdf.org/sp#>
+PREFIX spatial: <http://geovocab.org/spatial#>
+PREFIX lgdo: <http://linkedgeodata.org/ontology/>
+PREFIX spatialF: <http://jena.apache.org/function/spatial#>
+PREFIX unit: <http://www.opengis.net/def/uom/OGC/1.0/>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX ca: <http://www.semanticweb.org/jiantaowu/ontologies/2022/3/CubeCA/>
+PREFIX geos: <http://www.opengis.net/ont/geosparql#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX geof: <http://www.opengis.net/def/function/geosparql/>
+
+
+# interestion ; one of simple functions defined on DE-9IM patterns
+select ?sta ?label where {
+    {
+    select ?sta (strdt(concat("SRID=4326; ", str(?nWKT)) ,geos:wktLiteral) as ?pWKT) {
+      ?sta  ca:hasPointGeometry/geos:asWKT ?nWKT .
+    }
+  }
+  service <loop:http://localhost:3031/sparql> {
+    ?lc ca:hasPolygonGeometry ?polyg ; ca:hasClimateAnalysisCode ?code .
+    ?code a ca:CORINELandCoverCode ; rdfs:label ?label ; ca:codeOfProperty ?prop ; ca:codeOfFeature ?fe .
+    ?polyg geos:asWKT ?plWKT .
+    FILTER (geof:sfWithin(?pWKT, ?plWKT))
+  }
+}  
