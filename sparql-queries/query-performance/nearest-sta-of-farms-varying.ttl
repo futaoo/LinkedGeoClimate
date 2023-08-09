@@ -27,3 +27,20 @@ select ?wktLabel ?f ?sta ?dst {
   } order by asc(?dst) limit 1
   }
 }
+
+# remove the negative influence of "rdfs:label" in performance, linestring buildings start from 2000 
+
+select ?wktLabel ?f ?sta ?dst {
+  service <http://localhost:8014/sparql> 
+  {
+    select * { ?f a lgdo:Building; geos:hasGeometry/geos:asWKT ?fWkt .} offset 2000 limit 200
+  } 
+  service <loop:http://localhost:3031/sparql> {
+  select ?sta ?dst { 
+    {
+    select ?sta ?sWkt {?sta a sosa:Platform ; ca:hasPointGeometry/geos:asWKT ?sWkt .}
+  	}
+    bind (geof:distance(?sWkt, ?fWkt, unit:metre) as ?dst)
+  } order by asc(?dst) limit 1
+  }
+}
